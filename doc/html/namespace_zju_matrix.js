@@ -1,0 +1,26 @@
+var namespace_zju_matrix =
+[
+    [ "XBandDoubleMatrix", "class_zju_matrix_1_1_x_band_double_matrix.html", "class_zju_matrix_1_1_x_band_double_matrix" ],
+    [ "XDoubleMatrix", "class_zju_matrix_1_1_x_double_matrix.html", "class_zju_matrix_1_1_x_double_matrix" ],
+    [ "XList", "class_zju_matrix_1_1_x_list.html", "class_zju_matrix_1_1_x_list" ],
+    [ "XListNode", "class_zju_matrix_1_1_x_list_node.html", "class_zju_matrix_1_1_x_list_node" ],
+    [ "XPVector", "class_zju_matrix_1_1_x_p_vector.html", "class_zju_matrix_1_1_x_p_vector" ],
+    [ "XSquareDoubleMatrix", "class_zju_matrix_1_1_x_square_double_matrix.html", "class_zju_matrix_1_1_x_square_double_matrix" ],
+    [ "XSymDoubleMatrix", "class_zju_matrix_1_1_x_sym_double_matrix.html", "class_zju_matrix_1_1_x_sym_double_matrix" ],
+    [ "XVector", "class_zju_matrix_1_1_x_vector.html", "class_zju_matrix_1_1_x_vector" ],
+    [ "XDoubleList", "namespace_zju_matrix.html#a6ce76bda6b9666577433f285242b073f", null ],
+    [ "XDoubleVector", "namespace_zju_matrix.html#acd558917c5c1fc38e20e5e470aac0bce", null ],
+    [ "XIntList", "namespace_zju_matrix.html#a4b2773e760a745fc7a812e7986189dc8", null ],
+    [ "XIntVector", "namespace_zju_matrix.html#a04eca03006d511d4ae6e0670fc48d34b", null ],
+    [ "BtDB", "namespace_zju_matrix.html#adb5d7357f406f991e6baa475299f49e3", null ],
+    [ "GeneralizedJacobi", "namespace_zju_matrix.html#ad68eb09402771d7c75ed366d4eba00b5", null ],
+    [ "initialVector", "namespace_zju_matrix.html#a1fd619b483a34ca0f0f673bf7b05c61b", null ],
+    [ "max", "namespace_zju_matrix.html#a9abed6644569826f4f861c2b445ec373", null ],
+    [ "min", "namespace_zju_matrix.html#ab64e4368df2373a30c70c4e3ba8ff545", null ],
+    [ "norm2", "namespace_zju_matrix.html#aed3ba96a5d04c970734fed886b2b9113", null ],
+    [ "operator<<", "namespace_zju_matrix.html#a2481d2d11a6732bc9227f6e230b03ad0", null ],
+    [ "quickDescendSortVector", "namespace_zju_matrix.html#aafe172c381d8fdeea2d816be1b483519", null ],
+    [ "quickSortEigenSolution", "namespace_zju_matrix.html#a6073b1355339e0b80ebf8d2a2a5e9050", null ],
+    [ "subspaceIteration", "namespace_zju_matrix.html#ae5cf86026259bc253150f3de3a03d4b7", null ],
+    [ "sum2", "namespace_zju_matrix.html#ab0e8b13d7173fd075d0b0f33678709ea", null ]
+];

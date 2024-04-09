@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['eig_0',['eig',['../class_zju_matrix_1_1_x_sym_double_matrix.html#a82db20400b22689b1d3360e87ef26e93',1,'ZjuMatrix::XSymDoubleMatrix']]],
+  ['exchange_1',['exchange',['../class_zju_matrix_1_1_x_sym_double_matrix.html#a5619a9bde016664d11a7e0827d781b92',1,'ZjuMatrix::XSymDoubleMatrix::exchange()'],['../class_zju_matrix_1_1_x_vector.html#a43b490682968cc729310c6c22a7e4ad8',1,'ZjuMatrix::XVector::exchange()']]],
+  ['eye_2',['eye',['../class_zju_matrix_1_1_x_band_double_matrix.html#aba68124381c3f3c90a14a189cfcbc883',1,'ZjuMatrix::XBandDoubleMatrix::eye(int nSize)'],['../class_zju_matrix_1_1_x_band_double_matrix.html#a928ee5defd513a9d9cddc4c524a3c32b',1,'ZjuMatrix::XBandDoubleMatrix::eye()'],['../class_zju_matrix_1_1_x_double_matrix.html#a3368830d3af7d04afa16ca7076662a4b',1,'ZjuMatrix::XDoubleMatrix::eye()'],['../class_zju_matrix_1_1_x_square_double_matrix.html#a494e3fe6a707ae1ed266431c44b420b1',1,'ZjuMatrix::XSquareDoubleMatrix::eye(int nRow, int nCol)'],['../class_zju_matrix_1_1_x_square_double_matrix.html#acc2913e618af3df297929705888622c6',1,'ZjuMatrix::XSquareDoubleMatrix::eye(int nSize)'],['../class_zju_matrix_1_1_x_sym_double_matrix.html#aaa3262878c1b71ae72d3a2f62aacc9d8',1,'ZjuMatrix::XSymDoubleMatrix::eye()']]]
+];
