@@ -83,7 +83,7 @@ $ git config --global user.email "youtEmail@address.com"
 ### Get `ZjuMatrix`
 
 ```git
-$ git clone --recursive git@github.com:/xxxx/xxxx.git
+$ git clone --recursive https://github.com/xurongqiao/ZjuMatrix.git
 ```
 
 ### Configure and Generate `ZjuMatrix`
