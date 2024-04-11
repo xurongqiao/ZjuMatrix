@@ -20,7 +20,7 @@
 
 ​        `ZjuMatirx` is a object-oriented C++ vector and matrix class  library designed for finite element analysis. It contains vector classes, matrix classes, and functions declared in `ZjuMatrix` head files. Its functions can be concluded as followings: data storage management, basic operations and computations of vectors and matrices, matrix factorizations, equation solving and eigenvalue problem solving. These functions provide sound and portable underlying support for finite element analysis. 
 
-​        You can begin with the tutorials here: [Getting Started](doc/GETTING STARTED.md). Examples are provided in the `examples/` folder, and details are explained here: [Examples](doc/EXAMPLES.md).  For more detailed guidance of `ZjuMatrix`, please click here:  [Documentation](doc/html/index.html). 
+​        You can begin with the tutorials here: [Getting Started](doc/GETTINGSTARTED.md). Examples are provided in the `examples/` folder, and details are explained here: [Examples](doc/EXAMPLES.md).  For more detailed guidance of `ZjuMatrix`, please click here:  [Documentation](doc/html/index.html). 
 
 
 
@@ -40,7 +40,7 @@ To address these limitations, we propose the use of object-oriented technology a
 
 ## Getting Started
 
-​        Please begin with the tutorials here: [Getting Started](doc/GETTING STARTED.md).
+​        Please begin with the tutorials here: [Getting Started](doc/GETTINGSTARTED.md).
 
 ​        Examples are provided in the `examples/` folder, and details are explained here: [Examples](doc/EXAMPLES.md).
 
