@@ -4,8 +4,12 @@
 #include <iostream>
 #include<fstream>
 #include<string>
+
+#ifdef _WIN32
 #include "..\..\ZjuMatrix\ZjuMatrix.h"
-#include<windows.h>
+#else
+#include "../../ZjuMatrix/ZjuMatrix.h"
+#endif
 
 using namespace ZjuMatrix;
 using namespace std;
