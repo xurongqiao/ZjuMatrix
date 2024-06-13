@@ -10,6 +10,7 @@
 //=======================================================================
 
 #include "XSquareDoubleMatrix.h"
+#include <cmath>
 
 using namespace ZjuMatrix;
 
