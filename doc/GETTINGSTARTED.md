@@ -96,7 +96,17 @@ mkdir build
 cd build
 ```
 
-In Linux or Windows with MinGW-W64, please run `ZjuMatrix` configuration with `cmake ..` and compile with `make -j<N>`, where `N` is the desired number of processes. 
+In Linux or Macos 
+
+```sh
+
+mkdir build
+cd build
+cmake ..
+cmake --build .
+# you should see a executable for example 1 in build dir.
+
+```
 
 Otherwise, the recommand generator for ZjuMatrix is "Visual Studio 16 2019"，as ZjuMatrix was developed in this environment. Therefore, if the current generator is not the same as the recommand generator, you can altinatively choose to configure `ZjuMatrix` with
 

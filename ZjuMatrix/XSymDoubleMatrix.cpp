@@ -23,6 +23,7 @@
 //============================================================================
 
 #include "XSymDoubleMatrix.h"
+#include <cmath>
 
 using namespace ZjuMatrix;
 
