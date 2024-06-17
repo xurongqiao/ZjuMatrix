@@ -5,7 +5,7 @@
 #include<fstream>
 #include<string>
 #include "..\..\ZjuMatrix\ZjuMatrix.h"
-#include<windows.h>
+//#include<windows.h>
 
 using namespace ZjuMatrix;
 using namespace std;

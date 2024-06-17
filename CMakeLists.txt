@@ -21,6 +21,10 @@ CONFIGURE_FILE(examples/exampleOne/examOne_gK.txt ${CMAKE_CURRENT_BINARY_DIR} CO
 CONFIGURE_FILE(examples/exampleTwo/ExamTwo_gM.txt ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 CONFIGURE_FILE(examples/exampleTwo/ExamTwo_gK.txt ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
+CONFIGURE_FILE(Benchmark/gK.txt ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+CONFIGURE_FILE(Benchmark/gM.txt ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+
+
 # 遍历获取examples/exampleOne/路径下所有的*.cpp文件列表
 # Traverse to obtain a list of all *. cpp files in the path of examples/exampleOne/
 FILE(GLOB EXAMPLEONESOURCE_DIR_LIST "examples/exampleOne/*.cpp")	
@@ -42,6 +46,13 @@ FILE(GLOB TESTSOURCE_DIR_LIST "tests/*.cpp")
 # Generate an executable file from the file list TESTSOURCE_DIR_LIST
 ADD_EXECUTABLE(ZjuMatrixTest ${TESTSOURCE_DIR_LIST})
 
+#遍历获取Benchmark/路径下所有的*.cpp文件列表
+# Traverse to obtain a list of all *. cpp files in the path of tests/
+FILE(GLOB TESTSOURCE_DIR_LIST "Benchmark/*.cpp")	
+# 将TESTSOURCE_DIR_LIST中文件列表生成可执行文件
+# Generate an executable file from the file list TESTSOURCE_DIR_LIST
+ADD_EXECUTABLE(Benchmark ${TESTSOURCE_DIR_LIST})
+
 #在ZjuMatrixExampleOne中添加ZjuMatrix库
 # include ZjuMatrix library in ZjuMatrixExampleOne
 TARGET_LINK_LIBRARIES(ZjuMatrixExampleOne PRIVATE ZjuMatrix)
@@ -51,3 +62,7 @@ TARGET_LINK_LIBRARIES(ZjuMatrixExampleTwo PRIVATE ZjuMatrix)
 #在ZjuMatrixTest中添加ZjuMatrix库
 # include ZjuMatrix library in ZjuMatrixTest
 TARGET_LINK_LIBRARIES(ZjuMatrixTest PRIVATE ZjuMatrix)
+#在Benchmark中添加ZjuMatrix库
+# include ZjuMatrix library in Benchmark
+TARGET_LINK_LIBRARIES(Benchmark PRIVATE ZjuMatrix)
+

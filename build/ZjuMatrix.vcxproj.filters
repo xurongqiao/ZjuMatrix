@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XBandDoubleMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XDoubleMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XPVector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XSquareDoubleMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XSymDoubleMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XVector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\ZjuMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XBandDoubleMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XDoubleMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XPVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XSquareDoubleMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XSymDoubleMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\XVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\ZjuMatrix\ZjuMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\ZJU\subspaceIteration\ZjuMatrix-main\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{61EC2E6C-7A2B-3E97-87F5-CFE411FDE032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{B369B6EF-4A56-3080-B27C-34EE2CA73709}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,22 +1,22 @@
-// ZjuMatrixExampleTwo.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// ZjuMatrixDemo.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include<fstream>
 #include<string>
 #include "..\..\ZjuMatrix\ZjuMatrix.h"
-#include<windows.h>
 
 using namespace ZjuMatrix;
 using namespace std;
 
+
 int main()
 {
-    
-    // Example2: 子空间迭代法求解广义特征值问题 START
-    // 用txt读有限元数据
-    int nIteration1, nMaxIteration, np, nn;
-    
+
+ // Example2: 子空间迭代法求解广义特征值问题 START
+ // 用txt读有限元数据
+    int nIteration, nMaxIteration, np, nn;
+
     XDoubleVector vEigenValue;
     XDoubleMatrix mEigenVector;
     double dTol;
@@ -31,6 +31,7 @@ int main()
     vEigenValue.resetSize(np);
     mEigenVector.resetSize(nn, np);
 
+    
     ifstream infileK;
     infileK.open("ExamTwo_gK.txt", ios::in);
 
@@ -94,30 +95,70 @@ int main()
 
     infileM.close();
 
-    mK = mK_;
-    mM = mM_;
 
-    DWORD start_time = GetTickCount64();
+    XIntVector viSkylineK(299);
+    for (int i = 1; i <= mK_.rowSize(); i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            if (mK_.Aij(i, j) != 0)
+            {
+                viSkylineK(i) = i - j + 1;
+                break;
+            }
+        }
+    }
 
+    XIntVector viSkylineM(299);
+    for (int i = 1; i <= mM_.rowSize(); i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            if (mM_.Aij(i, j) != 0)
+            {
+                viSkylineM(i) = i - j + 1;
+                break;
+            }
+        }
+    }
+    
+    mK.resetSkyline(viSkylineK);
+    mM.resetSkyline(viSkylineM);
+
+    for (int i = 1; i <= mK_.size(); i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            if (mK_.Aij(i, j) != 0)
+            {
+                mK(i, j) = mK_.Aij(i, j);
+            }
+        }
+    }
+    for (int i = 1; i <= mM_.size(); i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            if (mM_.Aij(i, j) != 0)
+            {
+                mM(i, j) = mM_.Aij(i, j);
+            }
+        }
+    }
 
     XDoubleMatrix mX0;
     int nm = 3;
-    dTol = 0.000001;
+    dTol = 1e-9;
     nMaxIteration = 100;
-    int nIteration = subspaceIteration(mK, mM, vEigenValue, mEigenVector, dTol, nMaxIteration, nm, nn);
+    nIteration = subspaceIteration(mK, mM, vEigenValue, mEigenVector, dTol, nMaxIteration, nm, nn);
     cout << "vEigenValue =" << endl << vEigenValue << endl;
-    cout << "特征向量 " << endl;
-    cout << "eigenvectors " << endl;
+    cout << "特征向量： " << endl;
     for (int i = 1; i <= nn; i++)
     {
         for (int j = 1; j <= nm; j++)
             printf("%.15f       ", mEigenVector.Aij(i, j));
         cout << endl;
     }
-
-    DWORD end_time = GetTickCount64();
-    cout << "这个程序运行时间为：" << (end_time - start_time) << "ms." << endl;
-    cout << "The run time of the program is " << (end_time - start_time) << "ms." << endl;
 
     XDoubleVector vV3;
     vV3.resetSize(303);
@@ -129,7 +170,6 @@ int main()
     }
     vV3(303) = mEigenVector.Aij(nn, 1);
 
-    cout << "The first mode： " << endl;
     cout << "第一阶： " << endl;
     cout << "dx: " << endl;
     for (int i = 1; i <= 303; i++)
@@ -148,7 +188,6 @@ int main()
         }
     }
 
-    cout << "The second mode： " << endl;
     cout << "第二阶： " << endl;
     for (int i = 3; i <= 300; i++)
     {
@@ -173,7 +212,6 @@ int main()
         }
     }
 
-    cout << "The third mode： " << endl;
     cout << "第三阶： " << endl;
     for (int i = 3; i <= 300; i++)
     {
@@ -199,7 +237,6 @@ int main()
     }
 
     // Example2: 子空间迭代法求解广义特征值问题 END
-    
 
 }
 
