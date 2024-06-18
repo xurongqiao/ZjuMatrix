@@ -108,6 +108,16 @@ And the complication will be done in Visual Studio 2019 and the ZjuMatrix.lib wi
 
  
 
+Runing ZjuMatrix codes in Linux or MacOs system requires some modifications of source codes:
+
+1. revisions of the ZjuMatrix library url (change ‘\’ into ‘/’); 
+
+2. include the C++ standard library cmath in header files; 
+
+3. delete the inclusion of windows.h in examples and its relevant timing operation. 
+
+
+
 ## Usage of `ZjuMatrix`
 
 `ZjuMatrix` is designed for finite element method. Both static and dynamic analysis of finite element problem are taken as examples to illustrate how `ZjuMatrix` accomplishes underlying support for finite element method. Source files and data files can be found in the path of `examples/`. 

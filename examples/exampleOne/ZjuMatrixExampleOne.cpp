@@ -20,7 +20,7 @@ int main()
     XSymDoubleMatrix mK_;
     XBandDoubleMatrix mK;
     int nn;
-    nn = 21;
+    nn = 12;
     mK_.resetSize(nn);
     vDelta.resetSize(nn, 1);
     vF.resetSize(nn, 1);
@@ -84,42 +84,38 @@ int main()
 
     infileF.close();
 
-    mK = mK_;
+
+    XIntVector viSkylineK(nn);
+    for (int i = 1; i <= mK_.rowSize(); i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            if (mK_.Aij(i, j) != 0)
+            {
+                viSkylineK(i) = i - j + 1;
+                break;
+            }
+        }
+    }
+    mK.resetSkyline(viSkylineK);
+    for (int i = 1; i <= mK_.size(); i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            if (mK_.Aij(i, j) != 0)
+            {
+                mK(i, j) = mK_.Aij(i, j);
+            }
+        }
+    }
 
     vDelta = solve(mK, vF);
-
-
-    cout << "x方向位移(x-direction displacement)：" << endl;
+    cout << "位移(displacement)：" << endl;
     for (int i = 1; i <= nn; i++)
     {
-        if (i % 3 == 1)
-        {
-            printf("%.8e       ", vDelta.Aij(i, 1));
-            cout << endl;
-        }
+        printf("%.8e       ", vDelta.Aij(i, 1));
+        cout << endl;
     }
-
-    cout << "y方向位移(y-direction displacement)：" << endl;
-    for (int i = 1; i <= nn; i++)
-    {
-        if (i % 3 == 2)
-        {
-            printf("%.8e       ", vDelta.Aij(i, 1));
-            cout << endl;
-        }
-    }
-
-    cout << "转角(rotation)：" << endl;
-    for (int i = 1; i <= nn; i++)
-    {
-        if (i % 3 == 0)
-        {
-            printf("%.8e       ", vDelta.Aij(i, 1));
-            cout << endl;
-        }
-    }
-
-    // cout << vDelta << endl;
 
 
     // Example1: 静力问题——线性代数方程组求解 END

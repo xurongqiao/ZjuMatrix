@@ -1,19 +1,47 @@
-﻿#include <benchmark/benchmark.h>
-
-#include <iostream>
+﻿#include <iostream>
 #include<fstream>
+#include <chrono>
 #include<string>
 #include "..\..\lib\ZjuMatrix\ZjuMatrix.h"
+#include<windows.h>
+#include <Eigen/Eigenvalues>
 #include <Eigen/Dense>
 
-using namespace std;
+
+#include <psapi.h>
+#pragma comment(lib, "Psapi.lib")
 using namespace ZjuMatrix;
+using namespace std;
 using namespace Eigen;
 
+// Function to get current memory usage in kilobytes
+SIZE_T getMemoryUsage() {
+    PROCESS_MEMORY_COUNTERS memCounters;
+    GetProcessMemoryInfo(GetCurrentProcess(), &memCounters, sizeof(memCounters));
+    return memCounters.PeakWorkingSetSize / 1024; // Convert bytes to kilobytes
+}
 
-//测试ZjuMatrix广义特征值问题
-static void BM_ZjuMatrixGenerailizedEigenValueSolver(benchmark::State& state) {
-    int nMaxIteration, np, nn;
+// Function to get CPU time used in microseconds
+ULONGLONG getCPUUsage() {
+    FILETIME creationTime, exitTime, kernelTime, userTime;
+    GetProcessTimes(GetCurrentProcess(), &creationTime, &exitTime, &kernelTime, &userTime);
+
+    ULARGE_INTEGER kTime, uTime;
+    kTime.LowPart = kernelTime.dwLowDateTime;
+    kTime.HighPart = kernelTime.dwHighDateTime;
+    uTime.LowPart = userTime.dwLowDateTime;
+    uTime.HighPart = userTime.dwHighDateTime;
+
+    return (kTime.QuadPart + uTime.QuadPart) / 10; // Convert to microseconds
+}
+
+
+int main()
+{
+
+    // Example2: 子空间迭代法求解广义特征值问题 START
+    // 用txt读有限元数据
+    int nIteration, nMaxIteration, np, nn;
 
     XDoubleVector vEigenValue;
     XDoubleMatrix mEigenVector;
@@ -29,13 +57,14 @@ static void BM_ZjuMatrixGenerailizedEigenValueSolver(benchmark::State& state) {
     vEigenValue.resetSize(np);
     mEigenVector.resetSize(nn, np);
 
+
     ifstream infileK;
     infileK.open("gK.txt", ios::in);
 
     if (!infileK.is_open())
     {
         cout << "fail to read file gK.txt" << endl;
-        
+        return 0;
     }
     string bufK;
     while (getline(infileK, bufK))
@@ -66,7 +95,7 @@ static void BM_ZjuMatrixGenerailizedEigenValueSolver(benchmark::State& state) {
     if (!infileM.is_open())
     {
         cout << "fail to read file gM.txt" << endl;
-        
+        return 0;
     }
     string bufM;
     while (getline(infileM, bufM))
@@ -145,96 +174,41 @@ static void BM_ZjuMatrixGenerailizedEigenValueSolver(benchmark::State& state) {
 
     XDoubleMatrix mX0;
     int nm = 3;
-    dTol = 1e-9;
+    dTol = 1e-5;
     nMaxIteration = 100;
-    for (auto _ : state)
-    {
-        int nIteration;
-        nIteration = subspaceIteration(mK, mM, vEigenValue, mEigenVector, dTol, nMaxIteration, nm, nn);
-    }
-}
-// Register the function as a benchmark
-BENCHMARK(BM_ZjuMatrixGenerailizedEigenValueSolver);
 
-// Define another benchmark
-// Eigen求解广义特征值问题
-static void BM_EigenGenerailizedEigenValueSolver(benchmark::State& state) {
+
+    // Start time
+    auto start = std::chrono::high_resolution_clock::now();
+
+    // Memory and CPU usage before the function call
+    SIZE_T memoryBefore = getMemoryUsage();
+    ULONGLONG cpuBefore = getCPUUsage();
+
+    nIteration = subspaceIteration(mK, mM, vEigenValue, mEigenVector, dTol, nMaxIteration, nm, nn);
+
+    // Memory and CPU usage after the function call
+    SIZE_T memoryAfter = getMemoryUsage();
+    ULONGLONG cpuAfter = getCPUUsage();
+
+    // End time
+    auto end = std::chrono::high_resolution_clock::now();
+
+    // Calculate duration
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+    // Output the execution time, memory usage, and CPU usage
+    std::cout << "Execution time: " << duration.count() << " milliseconds" << std::endl;
+    std::cout << "Memory usage: " << (memoryAfter - memoryBefore) << " kilobytes" << std::endl;
+    std::cout << "CPU usage: " << (cpuAfter - cpuBefore) << " microseconds" << std::endl;
     
-    int nn = 299;;
-    Eigen::MatrixXd Eigen_mK(nn, nn);
-    Eigen::MatrixXd Eigen_mM(nn, nn);
 
-    // 读数据
-    XSymDoubleMatrix mK_, mM_;
-    mK_.resetSize(nn);
-    mM_.resetSize(nn);
-
-    ifstream infileK;
-    infileK.open("gK.txt", ios::in);
-
-    if (!infileK.is_open())
+    int size = 299;
+    Eigen::MatrixXd Eigen_mK(size, size);
+    Eigen::MatrixXd Eigen_mM(size, size);
+    for (int i = 0; i < size; i++)
     {
-        cout << "fail to read file gK.txt" << endl;
-
-    }
-    string bufK;
-    while (getline(infileK, bufK))
-    {
-        int nLeftBracket, nRightBracket, nDot;
-        nLeftBracket = bufK.find("(");
-        nRightBracket = bufK.find(")");
-        nDot = bufK.find(",");
-        int i = std::stoi(bufK.substr(nLeftBracket + 1, nDot - nLeftBracket - 1));
-        int j = std::stoi(bufK.substr(nDot + 1, nRightBracket - nDot - 1));
-        string sk = bufK.substr(nRightBracket + 1);
-        if (!sk.empty())
-        {
-            sk.erase(0, sk.find_first_not_of(" "));
-            sk.erase(sk.find_last_not_of(" ") + 1);
-        }
-        double dk = std::stod(sk);
-        mK_(i, j) = dk;
-        if (mK_(i, j) == 0)
-            mK_(i, j) = 1e-12;
-    }
-
-    infileK.close();
-
-    ifstream infileM;
-    infileM.open("gM.txt", ios::in);
-
-    if (!infileM.is_open())
-    {
-        cout << "fail to read file gM.txt" << endl;
-
-    }
-    string bufM;
-    while (getline(infileM, bufM))
-    {
-        //cout << "bufM = " << bufM << endl;
-        int nLeftBracket, nRightBracket, nDot;
-        nLeftBracket = bufM.find("(");
-        nRightBracket = bufM.find(")");
-        nDot = bufM.find(",");
-        int i = std::stoi(bufM.substr(nLeftBracket + 1, nDot - nLeftBracket - 1));
-        int j = std::stoi(bufM.substr(nDot + 1, nRightBracket - nDot - 1));
-        string sm = bufM.substr(nRightBracket + 1);
-        if (!sm.empty())
-        {
-            sm.erase(0, sm.find_first_not_of(" "));
-            sm.erase(sm.find_last_not_of(" ") + 1);
-        }
-        double dm = std::stod(sm);
-        mM_(i, j) = dm;
-        if (mM_(i, j) == 0)
-            mM_(i, j) = 1e-12;
-    }
-
-    infileM.close();
-
-    for (int i = 0; i < nn; i++)
-    {
-        for (int j = 0; j < nn; j++)
+        for (int j = 0; j < size; j++)
         {
             Eigen_mK(i, j) = mK_.Aij(i + 1, j + 1);
             Eigen_mM(i, j) = mM_.Aij(i + 1, j + 1);
@@ -244,18 +218,35 @@ static void BM_EigenGenerailizedEigenValueSolver(benchmark::State& state) {
     // 创建求解器
     Eigen::GeneralizedEigenSolver<Eigen::MatrixXd> ges;
 
-    for (auto _ : state)
-    {
-        // 计算广义特征值
-        ges.compute(Eigen_mK, Eigen_mM);
-    }
+    // Start time
+    //auto start2 = std::chrono::high_resolution_clock::now();
+
+    // Start time
+    auto start2 = std::chrono::high_resolution_clock::now();
+
+    // Memory and CPU usage before the function call
+    SIZE_T memoryBefore2 = getMemoryUsage();
+    ULONGLONG cpuBefore2 = getCPUUsage();
+
+    // 计算广义特征值
+    ges.compute(Eigen_mK, Eigen_mM);
+
+    // Memory and CPU usage after the function call
+    SIZE_T memoryAfter2 = getMemoryUsage();
+    ULONGLONG cpuAfter2 = getCPUUsage();
+
+    // End time
+    auto end2 = std::chrono::high_resolution_clock::now();
+
+    // Calculate duration
+    auto duration2 = std::chrono::duration_cast<std::chrono::milliseconds>(end2 - start2);
+
+    // Output the execution time, memory usage, and CPU usage
+    std::cout << "Execution time: " << duration2.count() << " milliseconds" << std::endl;
+    std::cout << "Memory usage: " << (memoryAfter2 - memoryBefore2) << " kilobytes" << std::endl;
+    std::cout << "CPU usage: " << (cpuAfter2 - cpuBefore2) << " microseconds" << std::endl;
+
 }
-BENCHMARK(BM_EigenGenerailizedEigenValueSolver);
-
-BENCHMARK_MAIN();
-
-
-
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
