@@ -2,7 +2,7 @@
 #include<fstream>
 #include <chrono>
 #include<string>
-#include "..\..\lib\ZjuMatrix\ZjuMatrix.h"
+#include "..\ZjuMatrix\ZjuMatrix.h"
 #include<windows.h>
 #include <Eigen/Eigenvalues>
 #include <Eigen/Dense>
